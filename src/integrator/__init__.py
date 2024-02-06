@@ -34,7 +34,7 @@ class RK4Integrator(IntegratorBase):
     def compute_step(self, f, t_n, y_n, h):
         # Compute k1 through k4
         k1 = h * f(t_n, y_n)
-        k2 = h * f(t_n + h / 2, y_n + k1 / 2)
+        k2 = h * f(t_n + h / 2, y_n + k1)
         k3 = h * f(t_n + h / 2, y_n + k2 / 2)
         k4 = h * f(t_n + h, y_n + k3)
 
