@@ -35,7 +35,7 @@ class RK4Integrator(IntegratorBase):
         # Compute k1 through k4
         k1 = h * f(t_n, y_n)
         k2 = h * f(t_n + h / 2, y_n + k1)
-        k3 = h * f(t_n + h / 2, y_n + k2 / 2)
+        k3 = h * f(t_n + h / 2, y_n + k2)
         k4 = h * f(t_n + h, y_n + k3)
 
         # Return next velocity and position
