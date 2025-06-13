@@ -1,8 +1,10 @@
 name: My CI
+
+
 on:
   push:
     branches:
-      -main
+      - main
 
 jobs:
   hello:
