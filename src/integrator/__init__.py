@@ -61,7 +61,7 @@ class EulerIntegrator(IntegratorBase):
         dydt = f(t_n, y_n)
 
         # Return next velocity and position
-        return y_n - dydt * h
+        return y_n - dydt
 
 
 class RK4Integrator(IntegratorBase):
@@ -73,6 +73,6 @@ class RK4Integrator(IntegratorBase):
         k4 = h * f(t_n + h, y_n + k3)
 
         # Return next velocity and position
-        return y_n + 1 / 6 * (k1 + 2 * k2 + 2 * k3 + k4)
+        return 1 / 6 * (k1 + 2 * k2 + 2 * k3 + k4)
 
     # some comment
