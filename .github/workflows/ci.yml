@@ -1,4 +1,4 @@
-
+name: My CI
 
 on:
   push:
@@ -8,7 +8,11 @@ on:
 
 jobs:
   hello:
+    name: My first job
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Hello world"
+      - name: My first step
+        run: echo "Hello world"
+      - name: My second step
+        run: mkdir -z test
 
