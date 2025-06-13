@@ -15,7 +15,15 @@ jobs:
       
   test:
     name: Run tests
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: ["ubuntu-latest","windows-latest"]
+        python-version: ["3.9","3.13"]
+        include:
+          - os: "macos-latest"
+          - python-version: '3.11'
+    
+    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
       - name: Install package
