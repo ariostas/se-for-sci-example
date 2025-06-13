@@ -13,6 +13,13 @@ jobs:
     steps:
       - name: My first step
         run: echo "Hello world"
-      - name: My second step
-        run: mkdir -z test
+
+  test:
+    name: Run tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install package
+        run: pip install .[test]
+      - name: Run Pytest
+        run: python -m pytest -v
 
