@@ -5,27 +5,44 @@ on:
     branches:
       - main
 
+  pull_request:
+  workflow_dispatch:
+
+# this is a comment
+
 jobs:
   hello:
     name: My first job
     runs-on: ubuntu-latest
     steps:
       - name: My first step
-        run: echo "Hello World"
-      
+
+        run: echo "Hello world"
+
+
   test:
     name: Run tests
     strategy:
       matrix:
-        os: ["ubuntu-latest","windows-latest"]
-        python-version: ["3.9","3.13"]
+
+        os: ['ubuntu-latest', 'windows-latest']
+        python-version: ['3.9', '3.10']
         include:
-          - os: "macos-latest"
-          - python-version: '3.11'
-    
+          - os: 'macos-latest'
+            python-version: '3.11'
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v4
+      - name: Check out repo
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5 # this is another comment
+        with:
+          python-version: ${{ matrix.python-version }}
+      - run: echo "Running in ${{ matrix.os }} with Python ${{ matrix.python-version }}"
+      - name: Only runs on Linux
+        if: matrix.os == 'ubuntu-latest'
+        run: echo "This is linux"
+
       - name: Install package
         run: pip install .[test]
       - name: Run Pytest
