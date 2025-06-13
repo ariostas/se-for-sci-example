@@ -18,16 +18,23 @@ jobs:
 
   test:
     name: Run tests
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: ['ubuntu-latest', 'windows-latest']
+        python-version: ['3.9', '3.10']
+        include:
+          - os: 'macos-latest'
+            python-version: '3.11'
+    runs-on: ${{ matrix.os }}
     steps:
       - name: Check out repo
         uses: actions/checkout@v4
       - name: Set up Python
         uses: actions/setup-python@v5 # this is another comment
         with:
-          python-version: '3.13'
+          python-version: ${{ matrix.python-version }}
+      - run: echo "Running in ${{ matrix.os }} with Python ${{ matrix.python-version }}"
       - name: Install package
         run: pip install .[test]
       - name: Run Pytest
         run: python -m pytest -v
-
